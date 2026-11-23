@@ -1,0 +1,15 @@
+{
+  "sectors": [
+    {"name": "key_room", "polygon": [[0, 0], [0, 256], [384, 256], [384, 160], [384, 96], [384, 0]], "ceiling": 128, "tag": 1},
+    {"name": "locked_door", "polygon": [[384, 96], [384, 160], [448, 160], [448, 96]], "ceiling": 0, "tag": 10},
+    {"name": "exit_room", "polygon": [[448, 0], [448, 96], [448, 160], [448, 256], [768, 256], [768, 160], [768, 96], [768, 0]], "ceiling": 128, "tag": 2}
+  ],
+  "key": [96, 208],
+  "scene_spec": {
+    "key_position": [96, 208],
+    "door_approach": [352, 128],
+    "door_crossing": [480, 128],
+    "exit_position": [720, 128],
+    "door_direction": 0
+  }
+}

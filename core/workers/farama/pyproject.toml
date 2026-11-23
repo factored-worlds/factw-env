@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-farama-worker"
+version = "0.1.0+helloworld"
+description = "Isolated Farama environment adapters"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = ["gymnasium>=1,<2", "numpy>=1.26,<3", "pillow>=10,<13"]
+
+[project.scripts]
+fw-farama-worker = "factw.env.workers.farama.cli:main"
+fw-minari = "factw.env.workers.farama.minari:main"
+
+[project.optional-dependencies]
+minari = ["minari[hdf5]==0.5.4"]
+
+[project.entry-points."factored_worlds.farama_backends"]
+gymnasium = "factw.env.workers.farama.factories:gymnasium"
+gymnasium-robotics = "factw.env.workers.farama.factories:gymnasium_robotics"
+metaworld = "factw.env.workers.farama.factories:metaworld"
+highway = "factw.env.workers.farama.factories:highway"
+miniwob = "factw.env.workers.farama.factories:miniwob"
+ale = "factw.env.workers.farama.factories:ale"
+stable-retro = "factw.env.workers.farama.factories:stable_retro"
+shimmy = "factw.env.workers.farama.factories:shimmy"
+pettingzoo = "factw.env.workers.farama.factories:pettingzoo"
+mpe2 = "factw.env.workers.farama.factories:mpe2"
+magent2 = "factw.env.workers.farama.factories:magent2"
+momaland = "factw.env.workers.farama.factories:momaland"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/workers/farama"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/pyproject.toml"]

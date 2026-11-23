@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-mujoco-hanoi"
+version = "0.1.0+helloworld"
+description = "MuJoCo simulation of Tower of Hanoi with gantry and Panda arm controllers"
+requires-python = ">=3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = [
+    "factored-worlds-core==0.1.0+helloworld",
+    "factored-worlds-hanoi==0.1.0+helloworld",
+    "mujoco>=3.13,<4",
+]
+
+[project.scripts]
+fw-robot-hanoi = "factw.env.worlds.mujoco_hanoi.showcase.cli:main"
+
+[project.optional-dependencies]
+showcase = ["factored-worlds-hanoi[smsl]==0.1.0+helloworld", "pillow>=12,<13"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/worlds/mujoco_hanoi"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/pyproject.toml"]

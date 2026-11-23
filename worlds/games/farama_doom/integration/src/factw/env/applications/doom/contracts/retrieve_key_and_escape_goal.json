@@ -1,0 +1,24 @@
+{
+  "schema": "doom.refinement-original-goal/1",
+  "id": "retrieve_blue_key_open_door_and_exit",
+  "scenario_id": "games.doom/retrieve-key-and-escape",
+  "scenario_behavior_revision": 1,
+  "text": "Retrieve the blue key, open its physical door, and reach the native exit.",
+  "clauses": [
+    {
+      "id": "blue_key_acquired",
+      "meaning": "Obtain the blue key during this episode."
+    },
+    {
+      "id": "physical_door_opened",
+      "meaning": "Open the physical key-locked door for passage during this episode."
+    },
+    {
+      "id": "native_exit_completed",
+      "meaning": "Complete the native level exit during this episode; approaching or seeing the exit does not satisfy this clause."
+    }
+  ],
+  "agent_completion": "All three clauses are true in the current evidence-grounded estimate for this episode. False or unknown in any clause cannot declare completion.",
+  "temporal_scope": "The key/door achievements can persist as justified episode knowledge; they cannot be copied from a demonstration or previous episode. Escape requires evidence of actual exit completion.",
+  "revision_rule": "Original requirement meaning is fixed. Corrected subordinate models/grounding need explicit revalidation; they cannot redefine a root clause, its evidence authority or unknown handling to manufacture success."
+}

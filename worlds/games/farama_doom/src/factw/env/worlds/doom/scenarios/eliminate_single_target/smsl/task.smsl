@@ -1,0 +1,19 @@
+smsl "0.2";
+
+event observed(active: bool, alive: bool, ammo: bool, won: bool);
+
+branch Task {
+    fact active: [false, true] = unknown;
+    fact alive: [false, true] = unknown;
+    fact ammo: [false, true] = unknown;
+    fact won: [false, true] = unknown;
+    data evidence: event = null;
+
+    action left() when self.active and self.alive and not self.won outcomes(observed);
+    action right() when self.active and self.alive and not self.won outcomes(observed);
+    action shoot() when self.active and self.alive and self.ammo and not self.won outcomes(observed);
+    action wait() when self.active and self.won outcomes(observed);
+
+    on observed set(active = payload.active, alive = payload.alive,
+                    ammo = payload.ammo, won = payload.won, evidence = event.ref);
+}

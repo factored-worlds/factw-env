@@ -1,0 +1,16 @@
+smsl "0.2";
+
+event progress(has_key: bool?, door_open: bool?, at_exit: bool?, alive: bool?, active: bool);
+branch Task {
+    fact key_observed: [false, true] = false;
+    fact door_observed: [false, true] = false;
+    fact exit_observed: [false, true] = false;
+    fact active: [false, true] = unknown;
+    derive succeeded: [false, true] = self.key_observed and self.door_observed and self.exit_observed;
+    on progress set(
+        active=payload.active,
+        key_observed=self.key_observed or payload.has_key == true,
+        door_observed=self.door_observed or payload.door_open == true,
+        exit_observed=self.exit_observed or payload.at_exit == true
+    );
+}

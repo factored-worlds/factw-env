@@ -1,0 +1,13 @@
+smsl "0.2";
+system engine {
+  contract engines.step.v1 {
+    input command: "engines.command/1";
+    output transition: "engines.transition/1";
+    effect evolution;
+  }
+  component environment: environment {
+    block step: engines.step.v1 {
+      provider "engines.step";
+    }
+  }
+}

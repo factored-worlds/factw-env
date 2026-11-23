@@ -1,0 +1,8 @@
+smsl "0.2";
+event observed(terminated: bool, truncated: bool, outcome: string);
+branch Episode {
+  fact status: ["running", "terminated", "truncated"] = "running";
+  fact succeeded: [false, true] = unknown;
+  on observed when payload.terminated set(status="terminated");
+  on observed when not payload.terminated and payload.truncated set(status="truncated");
+}

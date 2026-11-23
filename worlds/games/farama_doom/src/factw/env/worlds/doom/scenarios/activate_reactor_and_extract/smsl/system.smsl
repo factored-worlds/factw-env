@@ -1,0 +1,21 @@
+smsl "0.2";
+system DoomCombat {
+    component perception: "subsymbolic-estimator" {
+        block estimate: subsymbolic.estimate { provider "doom.combat.telemetry"; }
+    }
+    component grounding: "symbolic-estimator" {
+        block facts: symbolic.ground { provider "doom.combat.ground"; }
+    }
+    component planner: "symbolic-planner" {
+        block plan: symbolic.plan { provider "doom.combat.plan"; }
+    }
+    component dispatcher: "subsymbolic-planner-dispatcher" {
+        block refine: subsymbolic.refine_skill { provider "doom.combat.refine"; }
+        block execute: subsymbolic.execute_skill { provider "doom.combat.execute"; }
+    }
+    component actor: "subsymbolic-actor" {
+        block control: subsymbolic.control_step { provider "doom.combat.control"; }
+    }
+    connect perception.estimate.estimate -> grounding.facts.estimate;
+    connect dispatcher.refine.target -> actor.control.target;
+}

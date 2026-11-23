@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-doom-worker"
+version = "0.1.0+helloworld"
+description = "ViZDoom backend and native player for the Farama worker"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["factored-worlds-farama-worker==0.1.0+helloworld", "vizdoom==1.3.2"]
+
+[project.entry-points."factored_worlds.farama_backends"]
+vizdoom = "factw.env.workers.doom.backend:Backend"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/workers/doom"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/NOTICE", "/pyproject.toml"]

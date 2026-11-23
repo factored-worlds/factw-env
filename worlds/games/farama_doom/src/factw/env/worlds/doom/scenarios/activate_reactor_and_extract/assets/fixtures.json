@@ -1,0 +1,5 @@
+[
+  {"id":0,"map":"MAP01","name":"low_health","position":[64,64],"angle":0,"health":25,"ammo":3},
+  {"id":1,"map":"MAP02","name":"empty_pistol","position":[192,64],"angle":90,"health":15,"ammo":0},
+  {"id":2,"map":"MAP03","name":"exposed_entry","position":[64,160],"angle":315,"health":40,"ammo":5}
+]

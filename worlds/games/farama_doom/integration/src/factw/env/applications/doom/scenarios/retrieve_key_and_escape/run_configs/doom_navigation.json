@@ -1,0 +1,38 @@
+{
+  "id": "doom-navigation",
+  "world_path": ".",
+  "objective": "Collect the blue key, open the locked door, and reach the native exit.",
+  "adapter": "application",
+  "provider": "dedicated Doom application",
+  "max_steps": 500,
+  "environment": "doom-application",
+  "guide": "integration/README.md",
+  "assistance": "Explicit reference-assisted grounding, symbolic planning and bounded numeric skills; no RGB-only or general Doom autonomy claim.",
+  "success_contract": "Observed key, door and exit facts plus native mission termination. Replay shows the recorded frames and state changes.",
+  "case_id": "games.doom",
+  "profile_id": "doom-navigation",
+  "scenario_id": "games.doom/retrieve-key-and-escape",
+  "scenario_refs": [
+    "games.doom/retrieve-key-and-escape"
+  ],
+  "dispatch": {
+    "schema": "engines.application-dispatch/1",
+    "module": "factw.env.applications.doom",
+    "arguments": [
+      "run",
+      "--scenario",
+      "games.doom/retrieve-key-and-escape"
+    ],
+    "options": {
+      "worker_python": "--worker-python",
+      "seed": "--seed",
+      "max_steps": "--max-steps",
+      "provider": "--planner"
+    },
+    "required_options": [
+      "worker_python"
+    ],
+    "distribution": "factored-worlds-doom-application"
+  },
+  "scenario_revision": 2
+}

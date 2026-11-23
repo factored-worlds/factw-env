@@ -1,0 +1,3 @@
+#define START_HEALTH 15
+#define START_AMMO 0
+#include "../task.acs"

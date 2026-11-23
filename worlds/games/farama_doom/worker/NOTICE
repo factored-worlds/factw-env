@@ -1,0 +1,7 @@
+ViZDoom worker dependency notice
+
+This package contains the case adapter and player integration. ViZDoom and its
+Freedoom/engine assets are separately installed runtime dependencies, not bundled
+here. Their upstream notices and licenses remain with the installed ViZDoom
+distribution. The case-owned worker environment pins ViZDoom 1.3.2 and records
+loaded native asset identities in backend metadata and play reports.

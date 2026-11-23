@@ -1,0 +1,54 @@
+#include "zcommon.acs"
+
+// The generated TEXTMAP supplies MapSpots for the four native sensors.
+#define DOOR_CENTER 900
+#define DOOR_APPROACH 901
+#define FAR_THRESHOLD 902
+#define EXIT_PAD 903
+
+global int 0:reward;
+global int 1:has_key;
+global int 2:door_passable;
+global int 3:exited;
+global int 4:near_door;
+global int 5:room_index;
+
+script 1 ENTER
+{
+    int dx = GetActorX(DOOR_CENTER);
+    int dy = GetActorY(DOOR_CENTER);
+    int ax = GetActorX(DOOR_APPROACH);
+    int ay = GetActorY(DOOR_APPROACH);
+    int fx = GetActorX(FAR_THRESHOLD);
+    int fy = GetActorY(FAR_THRESHOLD);
+    int ex = GetActorX(EXIT_PAD);
+    int ey = GetActorY(EXIT_PAD);
+    reward = 0;
+    exited = 0;
+    while (GetActorProperty(0, APROP_Health) > 0)
+    {
+        int x = GetActorX(0);
+        int y = GetActorY(0);
+        has_key = CheckInventory("BlueCard") > 0;
+        door_passable = GetSectorCeilingZ(10, dx, dy) >= 64.0;
+        near_door = VectorLength(x - ax, y - ay) <= 22.0;
+        room_index = 1;
+        if ((ax < fx && x >= fx) || (ax > fx && x <= fx) ||
+            (ay < fy && y >= fy) || (ay > fy && y <= fy))
+            room_index = 2;
+        if (has_key && door_passable && VectorLength(x - ex, y - ey) <= 25.0)
+        {
+            exited = 1;
+            reward += 1.0;
+            Exit_Normal(0);
+            terminate;
+        }
+        Delay(1);
+    }
+}
+
+script 2 (void)
+{
+    if (CheckInventory("BlueCard") > 0)
+        Door_Open(10, 16);
+}

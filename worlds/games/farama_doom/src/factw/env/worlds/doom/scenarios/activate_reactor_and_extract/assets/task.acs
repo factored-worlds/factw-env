@@ -1,0 +1,80 @@
+#include "zcommon.acs"
+
+global int 0:reward;
+global int 1:has_key;
+global int 2:door_passable;
+global int 3:exited;
+global int 4:reactor_active;
+global int 5:threats_remaining;
+global int 6:near_door;
+global int 7:near_reactor;
+global int 8:health_available;
+global int 9:ammo_available;
+global int 10:reserve_health_available;
+global int 11:extraction_passable;
+global int 12:armor_available;
+global int 13:room_index;
+
+function int LiveThreats(void)
+{
+    return (GetActorProperty(101, APROP_Health) > 0)
+         + (GetActorProperty(102, APROP_Health) > 0);
+}
+
+script 1 ENTER
+{
+    reward = 0;
+    has_key = 0;
+    door_passable = 0;
+    exited = 0;
+    reactor_active = 0;
+    extraction_passable = 0;
+    SetActorProperty(0, APROP_Health, START_HEALTH);
+    TakeInventory("Clip", 999);
+    if (START_AMMO > 0) GiveInventory("Clip", START_AMMO);
+    while (GetActorProperty(0, APROP_Health) > 0)
+    {
+        int x = GetActorX(0);
+        int y = GetActorY(0);
+        has_key = CheckInventory("BlueCard") > 0;
+        threats_remaining = LiveThreats();
+        door_passable = GetSectorCeilingZ(10, 800.0, 160.0) >= 64.0;
+        extraction_passable = GetSectorCeilingZ(20, 1152.0, 192.0) >= 64.0;
+        near_door = x >= 704.0 && x <= 832.0 && y >= 128.0 && y <= 192.0;
+        near_reactor = x >= 1056.0 && x <= 1120.0 && y >= 64.0 && y <= 128.0;
+        health_available = ThingCount(T_NONE, 201) > 0;
+        ammo_available = ThingCount(T_NONE, 202) > 0;
+        reserve_health_available = ThingCount(T_NONE, 204) > 0;
+        armor_available = ThingCount(T_NONE, 203) > 0;
+        room_index = 1;
+        if (x >= 384.0) room_index = 2;
+        if (x >= 832.0) room_index = 3;
+        if (x >= 1184.0) room_index = 4;
+        if (x >= 1344.0 && y >= 128.0 && y <= 256.0
+            && has_key && door_passable && reactor_active && extraction_passable
+            && threats_remaining == 0)
+        {
+            exited = 1;
+            reward += 1.0;
+            Exit_Normal(0);
+            terminate;
+        }
+        Delay(1);
+    }
+}
+
+script 2 (void)
+{
+    if (CheckInventory("BlueCard") > 0)
+        Door_Open(10, 16);
+}
+
+script 3 (void)
+{
+    if (!reactor_active && CheckInventory("BlueCard") > 0
+        && GetSectorCeilingZ(10, 800.0, 160.0) >= 64.0 && LiveThreats() == 0)
+    {
+        reactor_active = 1;
+        Door_Open(20, 16);
+    }
+}

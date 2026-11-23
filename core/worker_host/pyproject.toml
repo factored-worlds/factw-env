@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-external"
+version = "0.1.0+helloworld"
+description = "Factored Worlds Environment host for native world workers and benchmark protocols"
+requires-python = ">=3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = ["factored-worlds-core==0.1.0+helloworld"]
+
+[project.scripts]
+fw-benchmarks = "factw.env.external.cli:main"
+
+[project.optional-dependencies]
+smsl = ["pysmsl==0.2.0rc6"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/external"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/pyproject.toml"]

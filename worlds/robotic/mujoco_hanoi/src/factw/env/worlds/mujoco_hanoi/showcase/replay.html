@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot Hanoi replay</title>
+<style>
+:root { color-scheme: light; background: #f4efe5; color: #241e18; font: 16px/1.5 system-ui, sans-serif; }
+body { margin: 0 auto; max-width: 76rem; padding: clamp(1rem, 3vw, 3rem); }
+header, section { border-bottom: 1px solid #c9bcaa; padding-bottom: 1rem; }
+h1, h2 { margin: 0; font-family: Georgia, serif; font-weight: normal; }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; }
+h2 { font-size: 1.35rem; }
+main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+figure { margin: 0; }
+img { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: contain; background: #191915; }
+figcaption, .muted { color: #5e5447; }
+figcaption { margin-top: .5rem; font: .875rem/1.5 ui-monospace, monospace; }
+.player { display: flex; gap: .5rem; align-items: center; margin-top: .75rem; }
+button { background: #fff9ed; border: 1px solid #8d806b; color: #241e18; padding: .5rem .8rem; font: inherit; cursor: pointer; }
+input { flex: 1; accent-color: #33584d; min-width: 3rem; }
+dt { font: .8125rem/1.4 ui-monospace, monospace; overflow-wrap: anywhere; }
+dd { margin: 0; font: .8125rem/1.4 ui-monospace, monospace; color: #244f40; }
+dl { display: grid; grid-template-columns: 1fr max-content; gap: .55rem 1rem; }
+section + section { padding-top: 1rem; }
+:focus-visible { outline: 3px solid #28725e; outline-offset: 3px; }
+@media (max-width: 46rem) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Robot Hanoi replay</h1>
+  <span id="summary" class="muted"></span>
+</header>
+<main>
+  <div>
+    <figure><img id="frame" width="1280" height="720" alt="Recorded camera view of the Hanoi board and robot arm"><figcaption id="capture"></figcaption></figure>
+    <div class="player">
+      <button id="play" type="button">Play</button>
+      <button id="previous" type="button" aria-label="Previous frame">←</button>
+      <button id="next" type="button" aria-label="Next frame">→</button>
+      <input id="seek" type="range" min="0" value="0" aria-label="Timeline frame">
+    </div>
+  </div>
+  <div>
+    <section><h2>Latest confirmed change</h2><dl id="changes"></dl></section>
+    <section><h2>State Language facts</h2><dl id="facts"></dl></section>
+  </div>
+</main>
+<script id="data" type="application/json">[[REPLAY_DATA]]</script>
+<script>
+const {report, timeline} = JSON.parse(document.getElementById("data").textContent);
+const byId = (name) => document.getElementById(name);
+const seek = byId("seek");
+const play = byId("play");
+let timer;
+let index;
+seek.max = timeline.length - 1;
+const episode = report.seed == null ? "" : ` · goal ${"ABC"[report.goal[0]]} · seed ${report.seed}`;
+byId("summary").textContent = `MuJoCo simulation · ${report.mode === "agent" ? "Agent" : "Player"} · ${report.moves} placed moves · ${report.outcome}${episode}`;
+
+function rows(target, entries, empty) {
+  byId(target).replaceChildren(...(entries.length ? entries.flatMap(([name, value]) => {
+    const key = document.createElement("dt");
+    const term = document.createElement("dd");
+    key.textContent = name;
+    term.textContent = value;
+    return [key, term];
+  }) : [document.createTextNode(empty)]));
+}
+
+function show(requested) {
+  index = Math.max(0, Math.min(timeline.length - 1, requested));
+  const row = timeline[index];
+  seek.value = index;
+  byId("frame").src = row.image;
+  byId("capture").textContent = `${row.camera} camera · ${row.time.toFixed(2)} s · ${row.phase.replaceAll("_", " ")}`;
+  rows("changes", Object.entries(row.changes).map(([k, v]) => [k, v.join(" → ")]), "No fact changes recorded yet");
+  rows("facts", Object.entries(row.facts), "No confirmed board state");
+}
+
+function stop() {
+  clearTimeout(timer);
+  timer = undefined;
+  play.textContent = "Play";
+}
+
+function advance() {
+  if (index === timeline.length - 1) return stop();
+  timer = setTimeout(() => { show(index + 1); advance(); },
+    Math.max(35, (timeline[index + 1].time - timeline[index].time) * 1000));
+}
+
+play.onclick = () => {
+  if (timer !== undefined) return stop();
+  if (index === timeline.length - 1) show(0);
+  play.textContent = "Pause";
+  advance();
+};
+seek.oninput = () => { stop(); show(Number(seek.value)); };
+byId("previous").onclick = () => { stop(); show(index - 1); };
+byId("next").onclick = () => { stop(); show(index + 1); };
+show(0);
+</script>
+</body>
+</html>

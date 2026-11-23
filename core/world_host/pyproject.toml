@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-core"
+version = "0.1.0+helloworld"
+description = "Factored Worlds Environment observation, recording and world transport contracts"
+requires-python = ">=3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = ["numpy>=2.4,<3", "pillow>=12,<13"]
+
+[project.scripts]
+fw-episode-gif = "factw.env.core.recording.gif:main"
+
+[project.optional-dependencies]
+smsl = ["pysmsl==0.2.0rc6"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/core"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/pyproject.toml"]

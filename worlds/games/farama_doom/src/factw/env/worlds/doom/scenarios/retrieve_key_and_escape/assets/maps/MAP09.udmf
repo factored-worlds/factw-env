@@ -1,0 +1,378 @@
+namespace = "ZDoom";
+
+vertex
+{
+    x = 0.0;
+    y = 0.0;
+}
+vertex
+{
+    x = 0.0;
+    y = 256.0;
+}
+vertex
+{
+    x = 384.0;
+    y = 256.0;
+}
+vertex
+{
+    x = 384.0;
+    y = 160.0;
+}
+vertex
+{
+    x = 384.0;
+    y = 96.0;
+}
+vertex
+{
+    x = 384.0;
+    y = 0.0;
+}
+vertex
+{
+    x = 448.0;
+    y = 160.0;
+}
+vertex
+{
+    x = 448.0;
+    y = 96.0;
+}
+vertex
+{
+    x = 448.0;
+    y = 0.0;
+}
+vertex
+{
+    x = 448.0;
+    y = 256.0;
+}
+vertex
+{
+    x = 768.0;
+    y = 256.0;
+}
+vertex
+{
+    x = 768.0;
+    y = 160.0;
+}
+vertex
+{
+    x = 768.0;
+    y = 96.0;
+}
+vertex
+{
+    x = 768.0;
+    y = 0.0;
+}
+sector
+{
+    heightfloor = 0;
+    heightceiling = 128;
+    texturefloor = "FLOOR0_1";
+    textureceiling = "CEIL1_1";
+    lightlevel = 224;
+    id = 1;
+}
+sector
+{
+    heightfloor = 0;
+    heightceiling = 0;
+    texturefloor = "FLOOR0_1";
+    textureceiling = "CEIL1_1";
+    lightlevel = 224;
+    id = 10;
+}
+sector
+{
+    heightfloor = 0;
+    heightceiling = 128;
+    texturefloor = "FLOOR0_1";
+    textureceiling = "CEIL1_1";
+    lightlevel = 224;
+    id = 2;
+}
+sidedef
+{
+    sector = 0;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 0;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 0;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 0;
+    texturetop = "DOORBLU";
+    texturebottom = "STARTAN3";
+    texturemiddle = "-";
+}
+sidedef
+{
+    sector = 0;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 0;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 1;
+    texturetop = "DOORBLU";
+    texturebottom = "STARTAN3";
+    texturemiddle = "-";
+}
+sidedef
+{
+    sector = 1;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 1;
+    texturetop = "DOORBLU";
+    texturebottom = "STARTAN3";
+    texturemiddle = "-";
+}
+sidedef
+{
+    sector = 1;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "DOORBLU";
+    texturebottom = "STARTAN3";
+    texturemiddle = "-";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "EXITDOOR";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+sidedef
+{
+    sector = 2;
+    texturetop = "BIGDOOR2";
+    texturebottom = "STARTAN3";
+    texturemiddle = "STARTAN3";
+}
+linedef
+{
+    v1 = 0;
+    v2 = 1;
+    sidefront = 0;
+    blocking = true;
+}
+linedef
+{
+    v1 = 1;
+    v2 = 2;
+    sidefront = 1;
+    blocking = true;
+}
+linedef
+{
+    v1 = 2;
+    v2 = 3;
+    sidefront = 2;
+    blocking = true;
+}
+linedef
+{
+    v1 = 3;
+    v2 = 4;
+    sidefront = 3;
+    blocking = false;
+    sideback = 6;
+    twosided = true;
+    special = 80;
+    arg0 = 2;
+    playeruse = true;
+    repeatspecial = true;
+}
+linedef
+{
+    v1 = 4;
+    v2 = 5;
+    sidefront = 4;
+    blocking = true;
+}
+linedef
+{
+    v1 = 5;
+    v2 = 0;
+    sidefront = 5;
+    blocking = true;
+}
+linedef
+{
+    v1 = 3;
+    v2 = 6;
+    sidefront = 7;
+    blocking = true;
+}
+linedef
+{
+    v1 = 6;
+    v2 = 7;
+    sidefront = 8;
+    blocking = false;
+    sideback = 11;
+    twosided = true;
+    special = 80;
+    arg0 = 2;
+    playeruse = true;
+    repeatspecial = true;
+}
+linedef
+{
+    v1 = 7;
+    v2 = 4;
+    sidefront = 9;
+    blocking = true;
+}
+linedef
+{
+    v1 = 8;
+    v2 = 7;
+    sidefront = 10;
+    blocking = true;
+}
+linedef
+{
+    v1 = 6;
+    v2 = 9;
+    sidefront = 12;
+    blocking = true;
+}
+linedef
+{
+    v1 = 9;
+    v2 = 10;
+    sidefront = 13;
+    blocking = true;
+}
+linedef
+{
+    v1 = 10;
+    v2 = 11;
+    sidefront = 14;
+    blocking = true;
+}
+linedef
+{
+    v1 = 11;
+    v2 = 12;
+    sidefront = 15;
+    blocking = true;
+}
+linedef
+{
+    v1 = 12;
+    v2 = 13;
+    sidefront = 16;
+    blocking = true;
+}
+linedef
+{
+    v1 = 13;
+    v2 = 8;
+    sidefront = 17;
+    blocking = true;
+}
+thing
+{
+    x = 288.0;
+    y = 208.0;
+    type = 1;
+    angle = 30;
+    skill1 = true;
+    skill2 = true;
+    skill3 = true;
+    skill4 = true;
+    skill5 = true;
+    single = true;
+    dm = false;
+    coop = false;
+}
+thing
+{
+    x = 96.0;
+    y = 208.0;
+    type = 5;
+    skill1 = true;
+    skill2 = true;
+    skill3 = true;
+    skill4 = true;
+    skill5 = true;
+    single = true;
+    dm = false;
+    coop = false;
+}

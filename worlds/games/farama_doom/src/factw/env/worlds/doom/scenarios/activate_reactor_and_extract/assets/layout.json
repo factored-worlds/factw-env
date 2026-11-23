@@ -1,0 +1,29 @@
+{
+  "sectors": [
+    {"name": "supply", "polygon": [[0,0],[0,256],[320,256],[320,160],[320,96],[320,0]], "ceiling":128,"tag":1,"floor":"FLOOR0_1","light":224},
+    {"name": "corridor", "polygon": [[320,96],[320,160],[384,160],[384,96]], "ceiling":128,"tag":2,"floor":"FLAT5_4","light":192},
+    {"name": "arena", "polygon": [[384,0],[384,96],[384,160],[384,384],[768,384],[768,192],[768,128],[768,0]], "ceiling":160,"tag":3,"floor":"FLOOR4_8","light":208},
+    {"name": "blue_door", "polygon": [[768,128],[768,192],[832,192],[832,128]], "ceiling":0,"tag":10,"floor":"FLAT5_4","light":192},
+    {"name": "reactor", "polygon": [[832,64],[832,128],[832,192],[832,320],[1120,320],[1120,224],[1120,160],[1120,128],[1120,64]], "ceiling":160,"tag":4,"floor":"FLOOR0_1","light":192},
+    {"name": "extraction_door", "polygon": [[1120,160],[1120,224],[1184,224],[1184,160]], "ceiling":0,"tag":20,"floor":"FLAT5_4","light":224},
+    {"name": "extraction", "polygon": [[1184,128],[1184,160],[1184,224],[1184,256],[1440,256],[1440,128]], "ceiling":128,"tag":5,"floor":"FLOOR0_1","light":240}
+  ],
+  "things": [
+    {"name":"supply_health","position":[144,208],"type":2012,"id":201},
+    {"name":"supply_ammo","position":[96,208],"type":2048,"id":202},
+    {"name":"supply_armor","position":[144,64],"type":2018,"id":203},
+    {"name":"reserve_health","position":[880,280],"type":2012,"id":204},
+    {"name":"imp_one","position":[560,96],"type":3001,"id":101,"angle":180},
+    {"name":"imp_two","position":[656,288],"type":3001,"id":102,"angle":180},
+    {"name":"blue_key","position":[720,320],"type":5,"id":205}
+  ],
+  "scene_spec": {
+    "health":[144,208],"ammo":[96,208],"armor":[144,64],
+    "supply_approach":[288,128],"arena_entry":[432,128],
+    "key":[720,320],"door_approach":[736,160],"door_crossing":[880,160],
+    "reactor":[1088,96],"reserve_health":[880,280],
+    "extraction_approach":[1088,192],"extraction_crossing":[1216,192],"exit":[1376,192],
+    "door_direction":0,"reactor_direction":0,"required_kills":2,
+    "regions":{"supply":1,"arena":2,"reactor":3,"extraction":4}
+  }
+}

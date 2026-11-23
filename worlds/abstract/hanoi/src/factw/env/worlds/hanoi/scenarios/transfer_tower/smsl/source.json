@@ -1,0 +1,19 @@
+{
+  "repository": "https://github.com/state-language/smsl-spec",
+  "revision": "f11870690c75d764a43e0cf5201667b95e5a2420",
+  "license": "Apache-2.0",
+  "attribution": "State Language contributors",
+  "modified": false,
+  "files": [
+    {
+      "path": "hanoi.smsl",
+      "source_path": "examples/puzzles/hanoi/hanoi.smsl",
+      "sha256": "e2662bfc8817bb0027e00e18cd2f25dbd5249d41be493696c93f67a02e1f32a2"
+    },
+    {
+      "path": "LICENSE",
+      "source_path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}

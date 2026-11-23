@@ -1,0 +1,202 @@
+{
+  "schema": "engines.scenario/2",
+  "behavior_revision": 1,
+  "scenario_id": "abstract.hanoi/reach-peg-configuration",
+  "case_id": "abstract.hanoi",
+  "objective": {
+    "description": "Reach the configured legal disk-to-peg goal from the configured start using native legal moves.",
+    "parameters": {},
+    "success_contract": "Exact native configured goal; dataset policies may also intentionally collect illegal attempts and nonterminal histories."
+  },
+  "native_setup": {
+    "kind": "source-callable-resolution",
+    "backend": "abstract.hanoi",
+    "configuration": {},
+    "resolution_sources": [
+      {
+        "source_file": "worlds/abstract/hanoi/src/factoredw/lab/worlds/hanoi/datasets/policy.py",
+        "source_callable": "factoredw.lab.worlds.hanoi.datasets.policy:episode_plan",
+        "source_sha256": "f9410e0020ffc3c0f7cd20b18f0fae21b6d1d90b1ed018255238bea950a03076",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.hanoi.datasets.policy:episode_plan"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.hanoi.datasets.policy:episode_plan",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "required_parameters": [
+      {
+        "name": "start",
+        "required": true,
+        "value_schema": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "meaning": "Start within selected split."
+      },
+      {
+        "name": "allowed",
+        "required": true,
+        "value_schema": {
+          "type": "array",
+          "minItems": 1
+        },
+        "meaning": "Selected split configuration membership."
+      },
+      {
+        "name": "rng",
+        "required": true,
+        "value_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meaning": "Explicit collection RNG seed and generator configuration."
+      },
+      {
+        "name": "max_steps",
+        "required": true,
+        "value_schema": {
+          "type": "integer",
+          "minimum": 5
+        },
+        "meaning": "Explicit dataset task bound."
+      },
+      {
+        "name": "visit",
+        "required": true,
+        "value_schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "meaning": "Recorded per-start visit index."
+      }
+    ],
+    "resource_inputs": [],
+    "resource_bindings": [],
+    "current_source_selector": null,
+    "implementation_status": "external-prerequisites"
+  },
+  "instructions": {
+    "text": "Reach the configured legal disk-to-peg goal from the configured start using native legal moves.",
+    "profile_overrides": {},
+    "source": [
+      {
+        "source_file": "worlds/abstract/hanoi/src/factoredw/lab/worlds/hanoi/datasets/policy.py",
+        "source_callable": "factoredw.lab.worlds.hanoi.datasets.policy:episode_plan",
+        "source_sha256": "f9410e0020ffc3c0f7cd20b18f0fae21b6d1d90b1ed018255238bea950a03076",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.hanoi.datasets.policy:episode_plan"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.hanoi.datasets.policy:episode_plan",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "kind": "workflow-guidance-from-current-source"
+  },
+  "starts": {
+    "defaults": {
+      "source": "split_states(seed), episode_plan start/goal selection and recorded collection/style seeds."
+    },
+    "required_parameters": [],
+    "source": [
+      {
+        "source_file": "worlds/abstract/hanoi/src/factoredw/lab/worlds/hanoi/datasets/policy.py",
+        "source_callable": "factoredw.lab.worlds.hanoi.datasets.policy:episode_plan",
+        "source_sha256": "f9410e0020ffc3c0f7cd20b18f0fae21b6d1d90b1ed018255238bea950a03076",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.hanoi.datasets.policy:episode_plan"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.hanoi.datasets.policy:episode_plan",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "variation_policy": "Reset seeds/fixtures/styles remain recorded variations. Concrete task/assets and resolved parameters are separately hashed; no duplicated document sets."
+  },
+  "budgets": {
+    "defaults": {
+      "collection_default_max_steps": 16
+    },
+    "source": [
+      {
+        "source_file": "worlds/abstract/hanoi/src/factoredw/lab/worlds/hanoi/datasets/policy.py",
+        "source_callable": "factoredw.lab.worlds.hanoi.datasets.policy:episode_plan",
+        "source_sha256": "f9410e0020ffc3c0f7cd20b18f0fae21b6d1d90b1ed018255238bea950a03076",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.hanoi.datasets.policy:episode_plan"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.hanoi.datasets.policy:episode_plan",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "policy": "Host/native/skill/model/collection bounds retain distinct units, defaults and causes. A budget never establishes success."
+  },
+  "evaluation": {
+    "criterion": "Exact native configured goal; dataset policies may also intentionally collect illegal attempts and nonterminal histories.",
+    "source": [
+      {
+        "source_file": "worlds/abstract/hanoi/src/factoredw/lab/worlds/hanoi/env.py",
+        "source_callable": "factoredw.lab.worlds.hanoi.env:HanoiEnv.step",
+        "source_sha256": "aae87c771c7b02b1ec4819a84ab03a22b63fbfb5a1ddd870e099681e7d3030ae",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.hanoi.env:HanoiEnv.step"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.hanoi.env:HanoiEnv.step",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "parameters": {},
+    "reference_is_actor_input": false
+  },
+  "smsl": {
+    "entry": {
+      "distribution": "factored-worlds-hanoi",
+      "package": "factw.env.worlds.hanoi",
+      "resource": "scenarios/transfer_tower/smsl/hanoi.smsl"
+    },
+    "kind": "existing-resource-reference",
+    "target_contracts": [],
+    "applicability": "Apply only to the selected declared composition; imported optional monitors do not imply native goal verification.",
+    "goal_boundary": "native/task evaluator; optional monitor checks its declared evidence/stages, not unimplemented learned inference"
+  },
+  "profile_ids": [],
+  "workflow_ids": [
+    "abstract.hanoi/workflows/audit-all-state-action-attempts",
+    "abstract.hanoi/workflows/collect-transition-dataset"
+  ],
+  "availability": "external-prerequisites",
+  "evidence_scope": "Source-backed design, not an installed or executed resolver. Actual source callables/configs exist; migration validates the selected destination symbols/arguments and native prerequisites before use."
+}

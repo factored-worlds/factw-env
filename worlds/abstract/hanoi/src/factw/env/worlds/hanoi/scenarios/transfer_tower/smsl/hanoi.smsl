@@ -1,0 +1,39 @@
+smsl "0.2";
+
+// Three peg facts represent the board; Solved is computed from those facts.
+// Confirm one guarded operation per move. A larger disk cannot move while
+// covered, or land on a peg occupied by a smaller disk.
+branch Hanoi {
+    fact small_peg: ["a", "b", "c"] = "a";
+    fact medium_peg: ["a", "b", "c"] = "a";
+    fact large_peg: ["a", "b", "c"] = "a";
+    state Solved when self.small_peg == "c" and self.medium_peg == "c" and self.large_peg == "c";
+    activate self.Solved;
+
+    operation move_small_a when self.small_peg != "a" set(small_peg = "a");
+    operation move_small_b when self.small_peg != "b" set(small_peg = "b");
+    operation move_small_c when self.small_peg != "c" set(small_peg = "c");
+
+    operation move_medium_a
+        when self.medium_peg != "a" and self.small_peg != self.medium_peg and self.small_peg != "a"
+        set(medium_peg = "a");
+    operation move_medium_b
+        when self.medium_peg != "b" and self.small_peg != self.medium_peg and self.small_peg != "b"
+        set(medium_peg = "b");
+    operation move_medium_c
+        when self.medium_peg != "c" and self.small_peg != self.medium_peg and self.small_peg != "c"
+        set(medium_peg = "c");
+
+    operation move_large_a
+        when self.large_peg != "a" and self.small_peg != self.large_peg and self.medium_peg != self.large_peg
+            and self.small_peg != "a" and self.medium_peg != "a"
+        set(large_peg = "a");
+    operation move_large_b
+        when self.large_peg != "b" and self.small_peg != self.large_peg and self.medium_peg != self.large_peg
+            and self.small_peg != "b" and self.medium_peg != "b"
+        set(large_peg = "b");
+    operation move_large_c
+        when self.large_peg != "c" and self.small_peg != self.large_peg and self.medium_peg != self.large_peg
+            and self.small_peg != "c" and self.medium_peg != "c"
+        set(large_peg = "c");
+}

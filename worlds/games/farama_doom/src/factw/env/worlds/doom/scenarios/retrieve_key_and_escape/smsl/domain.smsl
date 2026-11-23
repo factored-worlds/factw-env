@@ -1,0 +1,44 @@
+smsl "0.2";
+
+event observed_active(value: bool);
+event observed_alive(value: bool?);
+event observed_has_key(value: bool?);
+event observed_door_open(value: bool?);
+event observed_near_door(value: bool?);
+event observed_at_exit(value: bool?);
+event observed_region(value: string?);
+event skill_finished(skill: string, status: string);
+
+branch Scene {
+    fact active: [false, true] = unknown;
+    fact alive: [false, true] = unknown;
+    fact has_key: [false, true] = unknown;
+    fact door_open: [false, true] = unknown;
+    fact near_door: [false, true] = unknown;
+    fact at_exit: [false, true] = unknown;
+    fact region: ["key_room", "exit_room"] = unknown;
+    data evidence: event = null;
+    data last_skill: string = "";
+    data last_outcome: string = "";
+
+    action collect_key() when self.active and self.alive and not self.has_key outcomes(skill_finished);
+    action approach_door() when self.active and self.alive and self.has_key and not self.near_door and not self.door_open outcomes(skill_finished);
+    action open_door() when self.active and self.alive and self.has_key and self.near_door and not self.door_open outcomes(skill_finished);
+    action reach_exit() when self.active and self.alive and self.has_key and self.door_open and not self.at_exit outcomes(skill_finished);
+    action wait() when self.active and self.at_exit outcomes(skill_finished);
+
+    on observed_active set(active=payload.value, evidence=event.ref);
+    on observed_alive when payload.value != null set(alive=payload.value);
+    on observed_alive when payload.value == null set(alive=unknown);
+    on observed_has_key when payload.value != null set(has_key=payload.value);
+    on observed_has_key when payload.value == null and self.has_key == false set(has_key=unknown);
+    on observed_door_open when payload.value != null set(door_open=payload.value);
+    on observed_door_open when payload.value == null and self.door_open == false set(door_open=unknown);
+    on observed_near_door when payload.value != null set(near_door=payload.value);
+    on observed_near_door when payload.value == null set(near_door=unknown);
+    on observed_at_exit when payload.value != null set(at_exit=payload.value);
+    on observed_at_exit when payload.value == null set(at_exit=unknown);
+    on observed_region when payload.value != null set(region=payload.value);
+    on observed_region when payload.value == null set(region=unknown);
+    on skill_finished set(last_skill=payload.skill, last_outcome=payload.status);
+}

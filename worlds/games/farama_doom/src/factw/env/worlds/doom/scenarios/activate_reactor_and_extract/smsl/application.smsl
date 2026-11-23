@@ -1,0 +1,32 @@
+smsl "0.2";
+application DoomCombat {
+    model domain from "domain.smsl";
+    model task from "task.smsl";
+    system from "system.smsl";
+    instance scene: domain { scope "doom-combat-scene"; subject "scene"; clock "observations"; }
+    instance task: task { scope "doom-combat-task"; subject "task"; clock "observations"; }
+    bind perception.estimate to scene {
+        input observation from host;
+        output estimate as "doom.combat.estimate.v1";
+    }
+    bind grounding.facts to scene { output updates as "doom.combat.facts.v1"; }
+    bind planner.plan to scene {
+        input knowledge from profile branch.knowledge.v1 config { branch="Scene"; };
+        input goal = { mission_complete=true; };
+        output plan as "doom.combat.plan.v1";
+    }
+    bind dispatcher.refine to scene {
+        input action from host;
+        input condition from host;
+        output target as "doom.combat.target.v1";
+    }
+    bind dispatcher.execute to scene {
+        input invocation from host;
+        input feedback from host;
+        output outcome as "doom.combat.outcome.v1";
+    }
+    bind actor.control to scene {
+        input estimate from host;
+        output command as "doom.combat.command.v1";
+    }
+}

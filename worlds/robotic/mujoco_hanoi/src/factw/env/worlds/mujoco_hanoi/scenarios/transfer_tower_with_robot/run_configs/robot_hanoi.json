@@ -1,0 +1,23 @@
+{
+  "id": "robot-hanoi",
+  "profile_id": "robot-hanoi",
+  "case_id": "robotic.mujoco-hanoi",
+  "scenario_id": "robotic.mujoco-hanoi/transfer-tower-with-robot",
+  "scenario_revision": 3,
+  "world_path": ".",
+  "objective": "Build the tower on the selected goal peg with the simulated Panda arm.",
+  "adapter": "application",
+  "provider": "settled-board Hanoi solver",
+  "environment": "mujoco-hanoi-smsl",
+  "guide": "README.md",
+  "assistance": "The solver uses confirmed disk pegs from the native simulator.",
+  "success_contract": "The arm releases each disk and native settled placement matches the destination.",
+  "dispatch": {
+    "schema": "engines.application-dispatch/1",
+    "module": "factw.env.worlds.mujoco_hanoi.showcase.cli",
+    "arguments": ["agent"],
+    "options": {"seed": "--seed"},
+    "required_options": [],
+    "distribution": "factored-worlds-mujoco-hanoi"
+  }
+}

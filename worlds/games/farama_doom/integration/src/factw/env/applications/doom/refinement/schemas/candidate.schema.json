@@ -1,0 +1,614 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "doom.refinement-candidate/1"
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "origin": {
+      "enum": [
+        "model_proposal",
+        "manual_contract_fixture"
+      ]
+    },
+    "request_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "original_goal_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      },
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "import_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from_document": {
+            "$ref": "#/$defs/id"
+          },
+          "import_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_document": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "required": [
+          "from_document",
+          "import_name",
+          "target_document"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "world_instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instance_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model_document": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "required": [
+          "instance_id",
+          "model_document"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "entrypoints": {
+      "type": "object",
+      "properties": {
+        "goal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "execution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "goal",
+        "execution"
+      ],
+      "additionalProperties": false
+    },
+    "goal_correspondence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "goal_clause_id": {
+            "$ref": "#/$defs/id"
+          },
+          "predicate": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/reference"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "grounding_id": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        },
+        "required": [
+          "goal_clause_id",
+          "predicate",
+          "meaning",
+          "grounding_id",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "state_correspondence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "parent": {
+            "$ref": "#/$defs/reference"
+          },
+          "refined": {
+            "$ref": "#/$defs/reference"
+          },
+          "abstraction": {
+            "$ref": "#/$defs/reference"
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "attribution": {
+            "enum": [
+              "reused",
+              "modified",
+              "new"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "parent",
+          "refined",
+          "abstraction",
+          "meaning",
+          "attribution",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "action_refinements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "parent_action": {
+            "$ref": "#/$defs/reference"
+          },
+          "refined_execution": {
+            "$ref": "#/$defs/reference"
+          },
+          "parent_precondition": {
+            "$ref": "#/$defs/condition"
+          },
+          "lower_precondition": {
+            "$ref": "#/$defs/condition"
+          },
+          "parent_postcondition": {
+            "$ref": "#/$defs/condition"
+          },
+          "lower_postcondition": {
+            "$ref": "#/$defs/condition"
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "attribution": {
+            "enum": [
+              "reused",
+              "modified",
+              "new"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "parent_action",
+          "refined_execution",
+          "parent_precondition",
+          "lower_precondition",
+          "parent_postcondition",
+          "lower_postcondition",
+          "meaning",
+          "attribution",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "grounding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "predicate": {
+            "$ref": "#/$defs/reference"
+          },
+          "binding_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "input_stream_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unknown_policy": {
+            "const": "preserve_unknown"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "predicate",
+          "binding_id",
+          "input_stream_ids",
+          "meaning",
+          "unknown_policy",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "primitive_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "leaf": {
+            "$ref": "#/$defs/reference"
+          },
+          "binding_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "contract_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "buttons": {
+                "type": "object",
+                "properties": {
+                  "MOVE_FORWARD": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  "MOVE_BACKWARD": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  "MOVE_LEFT": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  "MOVE_RIGHT": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  "TURN_LEFT": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  "TURN_RIGHT": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  "USE": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "buttons"
+            ],
+            "additionalProperties": false
+          },
+          "completion_rule": {
+            "const": "command_completion_is_not_observed_postcondition"
+          }
+        },
+        "required": [
+          "leaf",
+          "binding_id",
+          "contract_id",
+          "arguments",
+          "completion_rule"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/sample_reference"
+            }
+          },
+          "assessment": {
+            "enum": [
+              "supported",
+              "contradicted",
+              "unknown"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "claim",
+          "observations",
+          "assessment"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "kind": {
+            "enum": [
+              "import",
+              "binding",
+              "grounding",
+              "state_correspondence",
+              "goal_observability",
+              "evidence",
+              "other"
+            ]
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "subject",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "origin",
+    "request_sha256",
+    "original_goal_sha256",
+    "documents",
+    "import_bindings",
+    "world_instances",
+    "entrypoints",
+    "goal_correspondence",
+    "state_correspondence",
+    "action_refinements",
+    "grounding",
+    "primitive_bindings",
+    "evidence",
+    "unresolved"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed Doom refinement candidate envelope",
+  "description": "Inspectable proposal, not an execution permit. Core SMSL validity, reference/hash integrity, evidence authority and readiness need independent host checks.",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "document_id": {
+          "$ref": "#/$defs/id"
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "document_id",
+        "address"
+      ],
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "document_id": {
+          "$ref": "#/$defs/id"
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expression": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "document_id",
+        "branch",
+        "expression"
+      ],
+      "additionalProperties": false
+    },
+    "sample_reference": {
+      "type": "object",
+      "properties": {
+        "stream_id": {
+          "$ref": "#/$defs/id"
+        },
+        "sample_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "stream_id",
+        "sample_id"
+      ],
+      "additionalProperties": false
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "role": {
+          "enum": [
+            "model",
+            "abstraction",
+            "execution",
+            "system",
+            "application"
+          ]
+        },
+        "serialization": {
+          "enum": [
+            "smsl_text",
+            "smsl_json"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "serialization",
+        "source",
+        "sha256"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

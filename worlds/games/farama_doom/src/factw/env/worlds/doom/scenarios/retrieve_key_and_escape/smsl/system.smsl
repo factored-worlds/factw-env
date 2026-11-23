@@ -1,0 +1,21 @@
+smsl "0.2";
+system DoomNavigation {
+    component perception: "subsymbolic-estimator" {
+        block estimate: subsymbolic.estimate { provider "doom.telemetry"; }
+    }
+    component grounding: "symbolic-estimator" {
+        block facts: symbolic.ground { provider "doom.ground"; }
+    }
+    component planner: "symbolic-planner" {
+        block plan: symbolic.plan { provider "doom.plan"; }
+    }
+    component dispatcher: "subsymbolic-planner-dispatcher" {
+        block refine: subsymbolic.refine_skill { provider "doom.refine"; }
+        block execute: subsymbolic.execute_skill { provider "doom.execute"; }
+    }
+    component actor: "subsymbolic-actor" {
+        block control: subsymbolic.control_step { provider "doom.control"; }
+    }
+    connect perception.estimate.estimate -> grounding.facts.estimate;
+    connect dispatcher.refine.target -> actor.control.target;
+}

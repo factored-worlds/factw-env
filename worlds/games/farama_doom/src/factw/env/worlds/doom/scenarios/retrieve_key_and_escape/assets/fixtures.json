@@ -1,0 +1,12 @@
+[
+  {"id": 0, "map": "MAP01", "position": [64, 64], "angle": 0},
+  {"id": 1, "map": "MAP02", "position": [128, 64], "angle": 45},
+  {"id": 2, "map": "MAP03", "position": [192, 64], "angle": 90},
+  {"id": 3, "map": "MAP04", "position": [256, 64], "angle": 135},
+  {"id": 4, "map": "MAP05", "position": [320, 64], "angle": 180},
+  {"id": 5, "map": "MAP06", "position": [64, 128], "angle": 225},
+  {"id": 6, "map": "MAP07", "position": [160, 128], "angle": 270},
+  {"id": 7, "map": "MAP08", "position": [240, 192], "angle": 315},
+  {"id": 8, "map": "MAP09", "position": [288, 208], "angle": 30},
+  {"id": 9, "map": "MAP10", "position": [48, 208], "angle": 210}
+]

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doom replay · State Language</title>
+  <link rel="stylesheet" href="viewer.css">
+  <script src="timeline.js" defer></script>
+  <script src="viewer.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="header">
+      <div>
+        <p class="eyebrow">Doom replay</p>
+        <h1 id="title">Doom replay</h1>
+      </div>
+      <p id="outcome" class="outcome"></p>
+    </header>
+
+    <div class="layout">
+      <section aria-label="Replay frame and controls">
+        <figure>
+          <img id="frame" alt="First-person Doom view at the selected replay tick" width="800" height="600">
+          <figcaption id="frame-caption">RGB rendered from the recorded player commands</figcaption>
+        </figure>
+        <div class="controls">
+          <div class="seek-row">
+            <input id="seek" type="range" min="0" value="0" aria-label="Replay position">
+            <output id="time" for="seek"></output>
+          </div>
+          <div class="buttons">
+            <button id="play" class="primary" type="button">Play</button>
+            <button id="previous" type="button" aria-keyshortcuts="ArrowLeft">Previous frame</button>
+            <button id="next" type="button" aria-keyshortcuts="ArrowRight">Next frame</button>
+          </div>
+        </div>
+        <details>
+          <summary>Game measurements and commands</summary>
+          <p class="note">Doom supplies these values at the selected tick.</p>
+          <dl id="measurements" class="values"></dl>
+        </details>
+      </section>
+
+      <section class="facts-pane" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">State Language facts</h2>
+        <p id="change-caption" class="note"></p>
+        <dl id="changed-facts" class="values changed"></dl>
+        <div class="buttons change-buttons">
+          <button id="previous-change" type="button">Previous change</button>
+          <button id="next-change" type="button">Next change</button>
+        </div>
+        <details open>
+          <summary>All facts at this tick</summary>
+          <dl id="facts" class="values"></dl>
+        </details>
+      </section>
+    </div>
+    <footer><code id="recording"></code> · <a href="captures.json">Game captures</a> · <a href="symbolic_tracks.json">SMSL trace</a></footer>
+  </main>
+</body>
+</html>

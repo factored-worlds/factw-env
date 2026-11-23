@@ -1,0 +1,66 @@
+smsl "0.2";
+event initialized(black_turn: bool, terminated: bool, truncated: bool);
+event observed(black_turn: bool, terminated: bool, truncated: bool, accepted: bool);
+
+branch Turn {
+    fact black_turn: [false, true] = false;
+    data evidence: event = null;
+    initial White;
+
+    state White (black_turn: false) {
+        on initialized when payload.black_turn -> Black set(black_turn = true, evidence = event.ref);
+        on initialized when (not payload.black_turn) -> White set(black_turn = false, evidence = event.ref);
+        on observed when payload.black_turn -> Black set(black_turn = true, evidence = event.ref);
+        on observed when (not payload.black_turn) -> White set(black_turn = false, evidence = event.ref);
+    }
+
+    state Black (black_turn: true) {
+        on observed when payload.black_turn -> Black set(black_turn = true, evidence = event.ref);
+        on observed when (not payload.black_turn) -> White set(black_turn = false, evidence = event.ref);
+    }
+}
+
+branch Game {
+    fact game_over: [false, true] = false;
+    fact terminated: [false, true] = false;
+    fact truncated: [false, true] = false;
+    data evidence: event = null;
+    initial Playing;
+
+    state Playing (game_over: false, terminated: false, truncated: false) {
+        on initialized when payload.terminated -> Ended set(evidence = event.ref, game_over = true, terminated = true, truncated = false);
+        on initialized when payload.truncated -> Limited set(evidence = event.ref, game_over = true, terminated = false, truncated = true);
+        on initialized when ((not payload.terminated) and (not payload.truncated)) -> Playing set(evidence = event.ref, game_over = false, terminated = false, truncated = false);
+        on observed when payload.terminated -> Ended set(evidence = event.ref, game_over = true, terminated = true, truncated = false);
+        on observed when payload.truncated -> Limited set(evidence = event.ref, game_over = true, terminated = false, truncated = true);
+        on observed when ((not payload.terminated) and (not payload.truncated)) -> Playing set(evidence = event.ref, game_over = false, terminated = false, truncated = false);
+    }
+
+    state Ended (game_over: true, terminated: true, truncated: false) {
+    }
+
+    state Limited (game_over: true, terminated: false, truncated: true) {
+    }
+}
+
+branch LastAction {
+    fact observed: [false, true] = false;
+    fact last_action_accepted: [false, true] = false;
+    data evidence: event = null;
+    initial Unobserved;
+
+    state Unobserved (observed: false, last_action_accepted: false) {
+        on observed when payload.accepted -> Accepted set(evidence = event.ref, last_action_accepted = true, observed = true);
+        on observed when (not payload.accepted) -> Rejected set(evidence = event.ref, last_action_accepted = false, observed = true);
+    }
+
+    state Accepted (observed: true, last_action_accepted: true) {
+        on observed when payload.accepted -> Accepted set(evidence = event.ref, last_action_accepted = true, observed = true);
+        on observed when (not payload.accepted) -> Rejected set(evidence = event.ref, last_action_accepted = false, observed = true);
+    }
+
+    state Rejected (observed: true, last_action_accepted: false) {
+        on observed when payload.accepted -> Accepted set(evidence = event.ref, last_action_accepted = true, observed = true);
+        on observed when (not payload.accepted) -> Rejected set(evidence = event.ref, last_action_accepted = false, observed = true);
+    }
+}

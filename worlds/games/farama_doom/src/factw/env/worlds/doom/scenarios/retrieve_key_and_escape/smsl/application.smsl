@@ -1,0 +1,32 @@
+smsl "0.2";
+application DoomNavigation {
+    model domain from "domain.smsl";
+    model task from "task.smsl";
+    system from "system.smsl";
+    instance scene: domain { scope "doom-navigation-scene"; subject "scene"; clock "observations"; }
+    instance task: task { scope "doom-navigation-task"; subject "task"; clock "observations"; }
+    bind perception.estimate to scene {
+        input observation from host;
+        output estimate as "doom.estimate.v1";
+    }
+    bind grounding.facts to scene { output updates as "doom.facts.v1"; }
+    bind planner.plan to scene {
+        input knowledge from profile branch.knowledge.v1 config { branch="Scene"; };
+        input goal = { native_exit=true; };
+        output plan as "doom.plan.v1";
+    }
+    bind dispatcher.refine to scene {
+        input action from host;
+        input condition from host;
+        output target as "doom.target.v1";
+    }
+    bind dispatcher.execute to scene {
+        input invocation from host;
+        input feedback from host;
+        output outcome as "doom.outcome.v1";
+    }
+    bind actor.control to scene {
+        input estimate from host;
+        output command as "doom.command.v1";
+    }
+}

@@ -1,0 +1,245 @@
+{
+  "schema": "engines.scenario/2",
+  "behavior_revision": 2,
+  "scenario_id": "games.doom/retrieve-key-and-escape",
+  "case_id": "games.doom",
+  "objective": {
+    "description": "Retrieve the blue key, open its physical door, and reach the native exit.",
+    "parameters": {},
+    "success_contract": "Observed key/door/exit facts plus native successful termination."
+  },
+  "native_setup": {
+    "kind": "source-callable-resolution",
+    "backend": "vizdoom",
+    "configuration": {
+      "agent_default": "seeded native map",
+      "authored_fixture": "selected explicitly by index",
+      "visible": false,
+      "presentation": null
+    },
+    "resolution_sources": [
+      {
+        "source_file": "worlds/games/farama_doom/src/factoredw/lab/worlds/doom/assets.py",
+        "source_callable": "factoredw.lab.worlds.doom.assets:scenario_configuration",
+        "source_sha256": "ff1e2933711728be2659a1edf14cacdbb72d4d789a99ff9b2b13c157db8a1bda",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.doom.assets:scenario_configuration"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.doom.assets:scenario_configuration",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      },
+      {
+        "source_file": "worlds/games/farama_doom/agent/src/factoredw/lab/applications/doom/host/navigation_run.py",
+        "source_callable": "factoredw.lab.applications.doom.host.navigation_run:run",
+        "source_sha256": "a190f6e36c7039e9eca927baa24f17db85c4911f690978aca66eb859785d61df",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.applications.doom.host.navigation_run:run"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.applications.doom.scenarios.retrieve_key_and_escape.run:run",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "required_parameters": [],
+    "resource_inputs": [
+      {
+        "distribution": "factored-worlds-doom",
+        "package": "factw.env.worlds.doom",
+        "resource": "scenarios/retrieve_key_and_escape/assets"
+      }
+    ],
+    "resource_bindings": [
+      {
+        "parameter": "scenario_dir",
+        "resource": {
+          "distribution": "factored-worlds-doom",
+          "package": "factw.env.worlds.doom",
+          "resource": "scenarios/retrieve_key_and_escape/assets"
+        },
+        "lifetime": "Resolve/extract the complete directory tree before native setup; keep extraction alive until worker closes."
+      }
+    ],
+    "current_source_selector": null,
+    "implementation_status": "current-source-backed"
+  },
+  "instructions": {
+    "text": "Retrieve the blue key, open its physical door, and reach the native exit.",
+    "profile_overrides": {},
+    "source": [
+      {
+        "source_file": "worlds/games/farama_doom/src/factoredw/lab/worlds/doom/assets.py",
+        "source_callable": "factoredw.lab.worlds.doom.assets:scenario_configuration",
+        "source_sha256": "ff1e2933711728be2659a1edf14cacdbb72d4d789a99ff9b2b13c157db8a1bda",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.doom.assets:scenario_configuration"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.doom.assets:scenario_configuration",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      },
+      {
+        "source_file": "worlds/games/farama_doom/agent/src/factoredw/lab/applications/doom/host/navigation_run.py",
+        "source_callable": "factoredw.lab.applications.doom.host.navigation_run:run",
+        "source_sha256": "a190f6e36c7039e9eca927baa24f17db85c4911f690978aca66eb859785d61df",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.applications.doom.host.navigation_run:run"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.applications.doom.scenarios.retrieve_key_and_escape.run:run",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "kind": "workflow-guidance-from-current-source"
+  },
+  "starts": {
+    "defaults": {
+      "generated_agent_map": true,
+      "seed_range": [0, 2147483647],
+      "authored_fixture_index": 0,
+      "allowed_fixture_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "required_parameters": [],
+    "source": [
+      {
+        "source_file": "worlds/games/farama_doom/src/factoredw/lab/worlds/doom/assets.py",
+        "source_callable": "factoredw.lab.worlds.doom.assets:scenario_configuration",
+        "source_sha256": "ff1e2933711728be2659a1edf14cacdbb72d4d789a99ff9b2b13c157db8a1bda",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.doom.assets:scenario_configuration"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.doom.assets:scenario_configuration",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      },
+      {
+        "source_file": "worlds/games/farama_doom/agent/src/factoredw/lab/applications/doom/host/navigation_run.py",
+        "source_callable": "factoredw.lab.applications.doom.host.navigation_run:run",
+        "source_sha256": "a190f6e36c7039e9eca927baa24f17db85c4911f690978aca66eb859785d61df",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.applications.doom.host.navigation_run:run"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.applications.doom.scenarios.retrieve_key_and_escape.run:run",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "variation_policy": "The agent samples the spawn, key, locked door, exit, room geometry and monster placements from its native reset seed. Each generated run saves the realized layout and hashed native assets. Explicit fixture indices select the authored maps."
+  },
+  "budgets": {
+    "defaults": {
+      "host_max_steps": 500,
+      "max_skill_steps": 80
+    },
+    "source": [
+      {
+        "source_file": "worlds/games/farama_doom/src/factoredw/lab/worlds/doom/assets.py",
+        "source_callable": "factoredw.lab.worlds.doom.assets:scenario_configuration",
+        "source_sha256": "ff1e2933711728be2659a1edf14cacdbb72d4d789a99ff9b2b13c157db8a1bda",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.worlds.doom.assets:scenario_configuration"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.worlds.doom.assets:scenario_configuration",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      },
+      {
+        "source_file": "worlds/games/farama_doom/agent/src/factoredw/lab/applications/doom/host/navigation_run.py",
+        "source_callable": "factoredw.lab.applications.doom.host.navigation_run:run",
+        "source_sha256": "a190f6e36c7039e9eca927baa24f17db85c4911f690978aca66eb859785d61df",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.applications.doom.host.navigation_run:run"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.applications.doom.scenarios.retrieve_key_and_escape.run:run",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "policy": "Host/native/skill/model/collection bounds retain distinct units, defaults and causes. A budget never establishes success."
+  },
+  "evaluation": {
+    "criterion": "Observed key/door/exit facts plus native successful termination.",
+    "source": [
+      {
+        "source_file": "worlds/games/farama_doom/agent/src/factoredw/lab/applications/doom/recording/mission.py",
+        "source_callable": "factoredw.lab.applications.doom.recording.mission:record_mission",
+        "source_sha256": "eb98ee9ff858e4e020ded8beb08a032a8880734378ff6cec4decd9f977c18594",
+        "execution_scope": "host",
+        "migration_candidates": [
+          "factw.env.applications.doom.recording.mission:record_mission"
+        ],
+        "purpose": "Existing source configuration/evaluation mechanism; migration validates the selected target symbol before use. Source reference is provenance, not a legacy import fallback.",
+        "runtime_binding": {
+          "target_callable": "factw.env.applications.doom.recording.mission:record_mission",
+          "state": "planned-unvalidated",
+          "failure_policy": "Unavailable until migration selects and validates the exact case-owned binding in its declared host/worker scope. Missing/ambiguous/unvalidated bindings fail before reset/effects. Source provenance must never be imported as a compatibility fallback or read from checkout at runtime."
+        }
+      }
+    ],
+    "parameters": {},
+    "reference_is_actor_input": false
+  },
+  "smsl": {
+    "entry": {
+      "distribution": "factored-worlds-doom",
+      "package": "factw.env.worlds.doom",
+      "resource": "scenarios/retrieve_key_and_escape/smsl/application.smsl"
+    },
+    "kind": "existing-resource-reference",
+    "target_contracts": [],
+    "applicability": "Apply only to the selected declared composition; imported optional monitors do not imply native goal verification.",
+    "goal_boundary": "native/task evaluator; optional monitor checks its declared evidence/stages, not unimplemented learned inference"
+  },
+  "profile_ids": [
+    "doom-missions"
+  ],
+  "workflow_ids": [
+    "games.doom/workflows/compare-key-retrieval-planners",
+    "games.doom/workflows/run-key-retrieval-agent"
+  ],
+  "availability": "current-source-backed",
+  "evidence_scope": "Source-backed design, not an installed or executed resolver. Actual source callables/configs exist; migration validates the selected destination symbols/arguments and native prerequisites before use."
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "engines.scenario/2",
+  "case_id": "robotic.mujoco-hanoi",
+  "scenario_id": "robotic.mujoco-hanoi/transfer-tower-with-robot",
+  "behavior_revision": 3,
+  "objective": {
+    "description": "Build a three-disk tower on the episode’s goal peg.",
+    "parameters": {
+      "player": {"start": [0, 0, 0], "goal": [2, 2, 2]},
+      "agent": {"sampling_profile": "legal-board-to-tower-v1", "seed_min": 0, "seed_max": 2147483647}
+    },
+    "success_contract": "The gripper is released and fresh settled native disk poses agree with the goal."
+  },
+  "native_setup": {
+    "kind": "inline-native-config",
+    "backend": "robotic.mujoco-hanoi",
+    "configuration": {"embodiment": "Franka Emika Panda", "mode": "mujoco-simulation"}
+  },
+  "instructions": {
+    "text": "Choose the top disk on a peg and a legal destination. The arm moves that disk and checks the placement before confirming a new state."
+  },
+  "evaluation": {
+    "criterion": "Fresh simulated disk pose, velocity and gripper contact verify each released disk on the selected goal peg.",
+    "parameters": {"goal_source": "episode.goal"}
+  },
+  "profile_ids": ["robot-hanoi"],
+  "workflow_ids": [],
+  "availability": "current-source-backed"
+}

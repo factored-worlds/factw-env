@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-doom"
+version = "0.1.0+helloworld"
+description = "Doom scenarios, resources and native world interaction"
+requires-python = ">=3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = [
+    "factored-worlds-core==0.1.0+helloworld",
+    "factored-worlds-external==0.1.0+helloworld",
+]
+
+[project.scripts]
+fw-doom-world = "factw.env.worlds.doom.cli:main"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/worlds/doom"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/pyproject.toml"]

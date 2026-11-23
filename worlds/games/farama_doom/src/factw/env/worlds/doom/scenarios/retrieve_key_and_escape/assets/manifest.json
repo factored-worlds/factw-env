@@ -1,0 +1,160 @@
+{
+  "format_version": 1,
+  "config_file": "key_door_exit.cfg",
+  "wad_file": "key_door_exit.wad",
+  "scene_spec": {
+    "key_position": [
+      96,
+      208
+    ],
+    "door_approach": [
+      352,
+      128
+    ],
+    "door_crossing": [
+      480,
+      128
+    ],
+    "exit_position": [
+      720,
+      128
+    ],
+    "door_direction": 0
+  },
+  "fixtures": [
+    {
+      "id": 0,
+      "map": "MAP01",
+      "position": [
+        64,
+        64
+      ],
+      "angle": 0
+    },
+    {
+      "id": 1,
+      "map": "MAP02",
+      "position": [
+        128,
+        64
+      ],
+      "angle": 45
+    },
+    {
+      "id": 2,
+      "map": "MAP03",
+      "position": [
+        192,
+        64
+      ],
+      "angle": 90
+    },
+    {
+      "id": 3,
+      "map": "MAP04",
+      "position": [
+        256,
+        64
+      ],
+      "angle": 135
+    },
+    {
+      "id": 4,
+      "map": "MAP05",
+      "position": [
+        320,
+        64
+      ],
+      "angle": 180
+    },
+    {
+      "id": 5,
+      "map": "MAP06",
+      "position": [
+        64,
+        128
+      ],
+      "angle": 225
+    },
+    {
+      "id": 6,
+      "map": "MAP07",
+      "position": [
+        160,
+        128
+      ],
+      "angle": 270
+    },
+    {
+      "id": 7,
+      "map": "MAP08",
+      "position": [
+        240,
+        192
+      ],
+      "angle": 315
+    },
+    {
+      "id": 8,
+      "map": "MAP09",
+      "position": [
+        288,
+        208
+      ],
+      "angle": 30
+    },
+    {
+      "id": 9,
+      "map": "MAP10",
+      "position": [
+        48,
+        208
+      ],
+      "angle": 210
+    }
+  ],
+  "telemetry": {
+    "has_key": "USER1",
+    "door_open": "USER2",
+    "exited": "USER3",
+    "near_door": "USER4",
+    "region": "USER5"
+  },
+  "compiler": {
+    "project": "https://github.com/ZDoom/acc",
+    "version": "1.60",
+    "revision": "e37b18ed84b7aa165b558c8af270fd7d50fc4beb"
+  },
+  "runtime": {
+    "vizdoom_version": "1.3.2",
+    "iwad": {
+      "name": "freedoom2.wad",
+      "sha256": "a8772e088847032510d97ba2312406a6998f21cbab44d4ff10696faa9c0ecd4b"
+    },
+    "engine_resources": {
+      "name": "vizdoom.pk3",
+      "sha256": "24381138aede0ab03a4266f8fdd0225a1819658f004d37c9dc349e006b74f34e"
+    }
+  },
+  "assets": {
+    "layout.json": "3218d9e6d342aedb33234c36fe196aaa32dd79a4056f7b418bcfd0e089b58889",
+    "fixtures.json": "ee28ff6f01841332d0d5088cc6578b521144ff83b6aa79fc9dec9297381bef0d",
+    "task.acs": "d7b0b3c62b6fd465f7ef5c7cd1a8455c3c53e667f1b051e8e3f1bab4e81df549",
+    "task.o": "25ab02bd2bccb08e2a6753b3bb5ebb9f5f8c468bf71a633b23fe3a7d006b841c",
+    "seeded_task.acs": "91ea7949aac28a686af502f03bb57173aad4273cb8e5e873b3a65492ca79ab57",
+    "seeded_task.o": "3ef9b440e58457fad385e5e55f430ac007e94d5637697cc9f8f2af2a84bbfd53",
+    "key_door_exit.cfg": "8459aaec553bfd1cf07594eb38c99c9662c5627b1dcca2e0aebc277670c5b02e",
+    "key_door_exit.wad": "dd066cc5b1558faa0a59395156f968f3d1dc88091f62130e01a53d9b153a935b",
+    "build.py": "68d99c44f78dcb25c83be8007da0c972a530e983cca774874253deaf6bf07171",
+    "maps/MAP01.udmf": "e3aa54b4df400ee88c6a55c5e6e5949e9dd6a9c48ecd77187dfcbe56a5373eba",
+    "maps/MAP02.udmf": "2ad6ee9d734b66793c28a67e40e595df366bfb247ed5a339a3261cae5f31b47a",
+    "maps/MAP03.udmf": "1342e0f96d1148ae10f1fcaef7c38f1adfebdc190680fdd228fd550075ca0d3b",
+    "maps/MAP04.udmf": "998f491b53bfa7b983fbf27871cc3a902c7ce1b50e94ddfd306d4ef83e6c0b3d",
+    "maps/MAP05.udmf": "3b99828597e369a3bbd3861532f4d708baaee16141ef8ec04ce79c197f7bc4e4",
+    "maps/MAP06.udmf": "0a3a1cf291851c601119a54ab87db3c7da7a014baf28ae133717890c9f746fd5",
+    "maps/MAP07.udmf": "b8074f86237ed55c4d63f8abd8337f2eed1b4b3e34448af7f86063be191cae74",
+    "maps/MAP08.udmf": "a877529633803ab7d7502f473844ff7e13576a55716951eefeabd69893b6d89e",
+    "maps/MAP09.udmf": "3ba2a34c8edd48f28a800a73d590cd78d58fc40b135c9b7892b7db934484b7f9",
+    "maps/MAP10.udmf": "be22c34796e23509fb3194edba37060fcf322516129b796f696c4e3600a8b168"
+  }
+}

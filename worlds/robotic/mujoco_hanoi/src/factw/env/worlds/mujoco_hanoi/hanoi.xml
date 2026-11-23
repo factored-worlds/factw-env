@@ -1,0 +1,38 @@
+<mujoco model="hanoi_gantry">
+      <compiler angle="radian"/>
+      <option timestep="0.002" integrator="implicitfast" cone="elliptic"/>
+      <visual><headlight ambient=".25 .25 .25" diffuse=".5 .5 .5"/><global offwidth="640" offheight="480"/><quality shadowsize="1024"/></visual>
+      <default><geom friction="2.5 .02 .002" solref=".008 1" solimp=".95 .99 .001" condim="4"/><joint damping="1"/></default>
+      <asset>{meshes}</asset>
+      <worldbody>
+        <light pos="0 -.4 1.4" dir="0 .2 -1" diffuse=".8 .8 .8"/>
+        <light pos=".5 .5 1" dir="-.4 -.4 -1" diffuse=".4 .4 .4"/>
+        <camera name="overview" pos=".70 -.95 .85" xyaxes=".805 .593 0 -.296 .402 .866"/>
+        <geom name="floor" type="plane" pos="0 0 -.038" size="2 2 .01" rgba=".15 .18 .23 1"/>
+        <geom name="board" type="box" pos="0 0 -.018" size=".46 .19 .018" rgba=".65 .47 .31 1"/>
+        {poles}{bodies}
+        <body name="gantry" gravcomp="1">
+          <joint name="x" type="slide" axis="1 0 0" range="-.4 .4"/>
+          <joint name="y" type="slide" axis="0 1 0" range="-.25 .25"/>
+          <joint name="z" type="slide" axis="0 0 1" range=".009 .42"/>
+          <geom name="palm" type="box" pos="0 0 .23" size=".023 .165 .012" mass=".4" rgba=".26 .3 .36 1"/>
+          <body name="finger_left" gravcomp="1">
+            <joint name="left" type="slide" axis="0 1 0" range=".025 .16"/>
+            <geom name="left_pad" type="box" size=".009 .006 .008" mass=".025" rgba=".18 .2 .24 1"/>
+            <geom type="box" pos="0 0 .117" size=".008 .005 .108" mass=".015" rgba=".48 .52 .57 1"/>
+          </body>
+          <body name="finger_right" gravcomp="1">
+            <joint name="right" type="slide" axis="0 -1 0" range=".025 .16"/>
+            <geom name="right_pad" type="box" size=".009 .006 .008" mass=".025" rgba=".18 .2 .24 1"/>
+            <geom type="box" pos="0 0 .117" size=".008 .005 .108" mass=".015" rgba=".48 .52 .57 1"/>
+          </body>
+        </body>
+      </worldbody>
+      <actuator>
+        <position name="x_servo" joint="x" kp="2200" kv="85" ctrlrange="-.4 .4" forcerange="-100 100"/>
+        <position name="y_servo" joint="y" kp="2200" kv="85" ctrlrange="-.25 .25" forcerange="-100 100"/>
+        <position name="z_servo" joint="z" kp="3500" kv="110" ctrlrange=".009 .42" forcerange="-100 100"/>
+        <position name="left_servo" joint="left" kp="500" kv="8" ctrlrange=".025 .16" forcerange="-12 12"/>
+        <position name="right_servo" joint="right" kp="500" kv="8" ctrlrange=".025 .16" forcerange="-12 12"/>
+      </actuator>
+    </mujoco>

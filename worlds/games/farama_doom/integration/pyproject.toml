@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factored-worlds-doom-application"
+version = "0.1.0+helloworld"
+description = "Grounded State Language planning and skill execution in Doom"
+requires-python = ">=3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = [
+    "factored-worlds-doom==0.1.0+helloworld",
+    "factored-worlds-external[smsl]==0.1.0+helloworld",
+    "pysmsl==0.2.0rc6",
+    "jsonschema>=4.23,<5",
+    "pillow>=12,<13",
+]
+
+[project.optional-dependencies]
+paced = ["smsl-runtime==0.2.0rc9"]
+models = ["smsl-harness[openai]==0.2.0rc14"]
+
+[project.scripts]
+fw-doom = "factw.env.applications.doom.cli:main"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/factw/env/applications/doom"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/LICENSE", "/pyproject.toml"]

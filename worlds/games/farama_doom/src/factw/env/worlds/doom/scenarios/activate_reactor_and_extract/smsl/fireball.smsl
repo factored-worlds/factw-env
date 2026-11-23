@@ -1,0 +1,16 @@
+smsl "0.2";
+
+domain Reading = uint[0..4294967295];
+
+event observed_fireball(id: uint, x: uint, y: uint, z: uint, horizontal_distance: uint?);
+
+branch Fireball {
+    fact id: Reading = unknown;
+    fact x: Reading = unknown;
+    fact y: Reading = unknown;
+    fact z: Reading = unknown;
+    fact horizontal_distance: Reading = unknown;
+
+    on observed_fireball when payload.horizontal_distance != null set(id=payload.id, x=payload.x, y=payload.y, z=payload.z, horizontal_distance=payload.horizontal_distance);
+    on observed_fireball when payload.horizontal_distance == null set(id=payload.id, x=payload.x, y=payload.y, z=payload.z, horizontal_distance=unknown);
+}

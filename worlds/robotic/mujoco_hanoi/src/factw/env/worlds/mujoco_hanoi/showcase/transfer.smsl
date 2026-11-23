@@ -1,0 +1,28 @@
+smsl "0.2";
+
+event transfer_started(disk: string, source_peg: string, target_peg: string);
+event arm_observed(phase: string, contact_disk: string);
+event placement_observed(disk: string, source_peg: string, target_peg: string);
+event transfer_ended(outcome: string);
+
+branch Robot {
+    fact status: ["idle", "moving", "failed", "interrupted"] = "idle";
+    fact moving_disk: ["none", "small", "medium", "large"] = "none";
+    fact from_peg: ["none", "a", "b", "c"] = "none";
+    fact to_peg: ["none", "a", "b", "c"] = "none";
+    fact arm_phase: ["none", "queued", "approach", "lower", "grasp", "lift", "transfer",
+                     "align", "place", "release", "retreat", "settle"] = "none";
+    fact grasp_contact_disk: ["none", "small", "medium", "large"] = "none";
+
+    on transfer_started when self.status == "idle"
+        set(status = "moving", moving_disk = payload.disk,
+            from_peg = payload.source_peg, to_peg = payload.target_peg, arm_phase = "queued");
+    on arm_observed when self.status == "moving"
+        set(arm_phase = payload.phase, grasp_contact_disk = payload.contact_disk);
+    operation confirm_placement when self.status == "moving" and self.grasp_contact_disk == "none"
+        set(status = "idle", moving_disk = "none", from_peg = "none", to_peg = "none",
+            arm_phase = "none");
+    on transfer_ended
+        set(status = payload.outcome, moving_disk = "none", from_peg = "none", to_peg = "none",
+            arm_phase = "none");
+}
